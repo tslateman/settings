@@ -135,7 +135,10 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = "__init_nvm: fu
 fi
 
 # syntax highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# personal local util bins
+export PATH=$PATH:~/.local/bin
 
 # markdown formatting
 rmd () {
@@ -146,6 +149,44 @@ rmd () {
 autoload -Uz compinit && compinit
 
 alias zshconfig="mate ~/.zshrc"
+
+# git aliases
 alias gck="git checkout"
-alias gct="git commit"
+alias gcmt="git commit"
+alias gdf="git diff --stat"
+alias gdff="git diff"
 alias gpl="git pull"
+alias gst="git status"
+alias gitst="git status"
+alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gad="git add"
+alias gwip="git commit -m 'wip'"
+alias gbr="git branch"
+alias gitbr="git branch"
+alias gamd="git commit --amend"
+
+# docker aliases
+alias dps="docker ps"
+alias dc-up="docker-compose run"
+alias dc-run="docker-compose run"
+alias dc-exec="docker-compose exec"
+alias dc-stop="docker-compose stop"
+alias dc-restart="docker-compose restart"
+alias dc-dj-mgm="docker-compose exec django python manage.py"
+alias dc-django-test="dc-exec django python manage.py test --keepdb"
+
+# Remove duplicate history
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_BEEP
+
+
+# pnpm
+export PNPM_HOME="/Users/tslater/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
