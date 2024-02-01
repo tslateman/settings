@@ -161,19 +161,29 @@ alias gitst="git status"
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gad="git add"
 alias gwip="git commit -m 'wip'"
+alias glint="git commit -m 'lint'"
 alias gbr="git branch"
 alias gitbr="git branch"
 alias gamd="git commit --amend"
+alias gref="git reflog"
 
 # docker aliases
-alias dps="docker ps"
-alias dc-up="docker-compose run"
-alias dc-run="docker-compose run"
-alias dc-exec="docker-compose exec"
-alias dc-stop="docker-compose stop"
-alias dc-restart="docker-compose restart"
-alias dc-dj-mgm="docker-compose exec django python manage.py"
-alias dc-django-test="dc-exec django python manage.py test --keepdb"
+alias dk='docker'
+alias dc='docker compose'
+alias dps='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
+alias dc-up="docker compose up"
+alias dc-run="docker compose run"
+alias dc-exec="docker compose exec"
+alias dc-stop="docker compose stop"
+alias dc-restart="docker compose restart"
+alias dj-test="dc-exec django python manage.py test --keepdb --nomigrations --settings canary.settings.test"
+alias dj-test-migrate="dc-exec django python manage.py test --keepdb --settings canary.settings.test"
+alias dj-test-parallel="dj-test --parallel 6"
+alias dj-mypy="dc-exec django mypy --config-file=mypy.ini --cache-dir=/dev/null"
+# macro to kill the docker desktop app and the VM (excluding vmnetd -> it's a service)
+function kdo() {
+  ps ax|grep -i docker|egrep -iv 'grep|com.docker.vmnetd'|awk '{print $1}'|xargs kill
+}
 
 # Remove duplicate history
 setopt EXTENDED_HISTORY
@@ -190,3 +200,5 @@ setopt HIST_BEEP
 export PNPM_HOME="/Users/tslater/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+export PATH=$PATH:/Users/tslater/dev/local-dev-scripts/scripts
+
