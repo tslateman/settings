@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/tslater/dev/canarytech_dev'
+let g:netrw_dirhist_3='/Users/tslater/.config/nvim/lua/tslater'
+let g:netrw_dirhist_2='/Users/tslater/notes'
+let g:netrw_dirhist_1='/Users/tslater/dev/scripts'
